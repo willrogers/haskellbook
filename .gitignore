@@ -2,3 +2,7 @@
 # Haskell build artefacts
 *.hi
 *.o
+
+# Vim temporary files
+*.swp
+*.swo
