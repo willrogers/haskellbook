@@ -76,6 +76,12 @@ any' :: (a -> Bool) -> [a] -> Bool
 any' f xs = foldr step False xs
     where step x acc = acc || f x
 
+-- is this right?
+cycle' :: [a] -> [a]
+cycle' xs = foldr step [] xs
+    where step y [] = y:(cycle' xs)
+          step y ys = y:ys
+
 
 main = do print $ asInt "33"
           print $ asIntFoldl "3"
@@ -88,3 +94,4 @@ main = do print $ asInt "33"
           print $ takeWhile' (\x -> x < 4) [1..5]
           print $ takeWhile'' (\x -> x < 4) [1..5]
           print $ any' (\x -> odd x) [2, 4, 7]
+          print $ take 6 (cycle' [1, 2, 3])
