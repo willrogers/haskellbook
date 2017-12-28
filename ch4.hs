@@ -82,6 +82,27 @@ cycle' xs = foldr step [] xs
     where step y [] = y:(cycle' xs)
           step y ys = y:ys
 
+-- this would be better using pattern matching
+head' :: [a] -> a
+head' xs = foldr (\x acc -> x) (last xs) xs
+
+-- foldr1 uses the last element from the list as the starting point
+head'' :: [a] -> a
+head'' xs = foldr1 (\x acc -> x) xs
+
+reverse' :: [a] -> [a]
+reverse' xs = foldl (\acc x -> x:acc) [] xs
+
+-- partial application
+product' :: Num a => [a] -> a
+product' = foldr (\x acc -> x * acc) 1
+
+filter' :: (a -> Bool)-> [a] -> [a]
+filter' f = foldr (\x acc -> if f x then x:acc else acc) []
+
+last' :: [a] -> a
+last' = foldl1 (\acc x -> x)
+
 
 main = do print $ asInt "33"
           print $ asIntFoldl "3"
@@ -95,3 +116,5 @@ main = do print $ asInt "33"
           print $ takeWhile'' (\x -> x < 4) [1..5]
           print $ any' (\x -> odd x) [2, 4, 7]
           print $ take 6 (cycle' [1, 2, 3])
+          print $ head'' [2, 3, 1]
+          print $ reverse' [2, 3, 1]
